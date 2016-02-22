@@ -6,6 +6,8 @@ import VIEWS.util.PaginationHelper;
 import MODELS.UsuarioFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -28,6 +30,10 @@ public class UsuarioController implements Serializable {
     private MODELS.UsuarioFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+     private String nombreUsuario,contraseña,message;
+   private List<Usuario> idp = new ArrayList();
+    private List<Usuario> cargaP = new ArrayList();
+    private int idProfile;
 
     public UsuarioController() {
     }
@@ -190,6 +196,62 @@ public class UsuarioController implements Serializable {
 
     public Usuario getUsuario(java.lang.Integer id) {
         return ejbFacade.find(id);
+    }
+
+    public Usuario getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Usuario current) {
+        this.current = current;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public List<Usuario> getIdp() {
+        return idp;
+    }
+
+    public void setIdp(List<Usuario> idp) {
+        this.idp = idp;
+    }
+
+    public List<Usuario> getCargaP() {
+        return cargaP;
+    }
+
+    public void setCargaP(List<Usuario> cargaP) {
+        this.cargaP = cargaP;
+    }
+
+    public int getIdProfile() {
+        return idProfile;
+    }
+
+    public void setIdProfile(int idProfile) {
+        this.idProfile = idProfile;
     }
 
     @FacesConverter(forClass = Usuario.class)
