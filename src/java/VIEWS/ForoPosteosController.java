@@ -6,6 +6,8 @@ import VIEWS.util.PaginationHelper;
 import MODELS.ForoPosteosFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -28,6 +30,12 @@ public class ForoPosteosController implements Serializable {
     private MODELS.ForoPosteosFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+        private List<ForoPosteos> carga = new ArrayList();
+    private List<ForoPosteos> cargaNoticias = new ArrayList();
+    private int idPosteo;
+    private List<ForoPosteos> carga2 = new ArrayList();
+    private String tit;
+
 
     public ForoPosteosController() {
     }
@@ -179,6 +187,29 @@ public class ForoPosteosController implements Serializable {
         recreateModel();
         return "List";
     }
+        public List<ForoPosteos> cargaUno(int id)
+    {
+        System.out.println(id);
+        carga.clear();
+        carga = ejbFacade.verP(id);
+        return carga;
+        
+    }
+        
+     public List<ForoPosteos> cargaTodos()
+         {
+             carga2.clear();
+             carga2=ejbFacade.findAll();
+             
+             return carga2;
+        
+         }
+         
+         public String verPost(int id)//metodo para cambiar de pagina USAR CON ¡¡¡¡COMMANDLINK!!!!
+         {
+             setIdPosteo(id);
+             return "/blog-single.xhtml";
+         }
 
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
@@ -190,6 +221,46 @@ public class ForoPosteosController implements Serializable {
 
     public ForoPosteos getForoPosteos(java.lang.Integer id) {
         return ejbFacade.find(id);
+    }
+
+    public List<ForoPosteos> getCarga() {
+        return carga;
+    }
+
+    public void setCarga(List<ForoPosteos> carga) {
+        this.carga = carga;
+    }
+
+    public List<ForoPosteos> getCargaNoticias() {
+        return cargaNoticias;
+    }
+
+    public void setCargaNoticias(List<ForoPosteos> cargaNoticias) {
+        this.cargaNoticias = cargaNoticias;
+    }
+
+    public int getIdPosteo() {
+        return idPosteo;
+    }
+
+    public void setIdPosteo(int idPosteo) {
+        this.idPosteo = idPosteo;
+    }
+
+    public List<ForoPosteos> getCarga2() {
+        return carga2;
+    }
+
+    public void setCarga2(List<ForoPosteos> carga2) {
+        this.carga2 = carga2;
+    }
+
+    public String getTit() {
+        return tit;
+    }
+
+    public void setTit(String tit) {
+        this.tit = tit;
     }
 
     @FacesConverter(forClass = ForoPosteos.class)
