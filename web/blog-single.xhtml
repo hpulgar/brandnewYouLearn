@@ -153,7 +153,7 @@
 		<div class="page-header-inner clearfix">
 		
 		<div class="page-title">	
-			<h2>TITULO
+			<h2>Título
                             <c:forEach items="#{foroPosteosController.cargaUno(foroPosteosController.idPosteo)}" var="fp"> 
                             
                             #{fp.titulo}
@@ -186,12 +186,12 @@
 					
 					<div class="blog-info">
 						<div class="blog-date">
-							<h3>18 <span>Oct</span></h3>
+							<h3>DiaFecha <span>MesFecha</span></h3>
 						</div>
 						<ul class="blog-meta">
-                                                    <li><strong>By</strong>#{fp.idUser.username}</li>
-							<li><strong>In</strong> Style</li>
-							<li><strong>Comments</strong> 3</li>
+                                                    <li><strong>Iniciado por</strong>#{fp.idUser.username}</li>
+							<li><strong>en categoria</strong> NomCategoria</li>
+							<li><strong>Commentarios</strong> numC</li>
 						</ul>
 					</div>
 					
@@ -199,11 +199,8 @@
 						<a href="#"><img src="images/02_demo_image.jpg" alt="" class="blog-image" /></a>
 						<c:forEach items="#{foroPosteosController.cargaUno(foroPosteosController.idPosteo)}" var="fp2"> 
                                                 <p>#{fp2.contenido}</p>
-						<blockquote>
-							<p> quote 1 </p>
-						</blockquote>
 						
-						<p> texto 2 </p>
+						
 						</c:forEach> 
 					</div>
 				
@@ -211,9 +208,9 @@
 					
 					<div class="news-social-links">
 						<ul class="clearfix">
-							<li class="tweet-link"><a href="#">Tweet this article</a></li>
-							<li class="facebook-link"><a href="#">Share on Facebook</a></li>
-							<li class="pinterest-link"><a href="#">Pin on Pinterest</a></li>
+							<li class="tweet-link"><a href="#">Tweetear este contenido</a></li>
+							<li class="facebook-link"><a href="#">Compartir en Facebook</a></li>
+							
 						</ul>
 					</div>
 					
@@ -221,7 +218,7 @@
 					
 					<div id="respond">
 						
-						<h3 class="block-title">3 Comments</h3>
+						<h3 class="block-title">numComentarios> en este posteo</h3>
 						
 						<ul class="comments">
 
@@ -236,9 +233,9 @@
 								<!-- BEGIN .comment-right -->
 								<div class="comment-right">
 
-									<p class="comment-info">Admin <span>Aug 6, 2012 at 9:37 am </span></p>
-									<p class="comment-text">Duis ut mauris ut lacus tincidunt viverra. Morbi ornare tellus vitae velit molestie ullamcorper. Mauris sodales congue est, nec tristique nulla vulputate eu. Aliquam at nulla ut diam scelerisque dictum eu sit amet lectus. </p>
-									<p class="reply"><a href="#">Reply</a></p>
+									<p class="comment-info">nomCommentarios <span>FechaComentarios </span></p>
+									<p class="comment-text">ContenidoComentario </p>
+									<p class="reply"><a href="#">Responder</a></p>
 
 								<!-- END .comment-right -->
 								</div>
@@ -255,9 +252,9 @@
 										<!-- BEGIN .comment-right -->
 										<div class="comment-right">
 
-											<p class="comment-info">Admin <span>Aug 6, 2012 at 9:37 am </span></p>
-											<p class="comment-text">Duis ut mauris ut lacus tincidunt viverra. Morbi ornare tellus vitae velit molestie ullamcorper. Mauris sodales congue est, nec tristique nulla vulputate eu. Aliquam at nulla ut diam scelerisque dictum eu sit amet lectus. </p>
-											<p class="reply"><a href="#">Reply</a></p>
+											<p class="comment-info">nomRespondedor <span>Fecharespusta </span></p>
+											<p class="comment-text">ContenidoRespuesta </p>
+											<!--<p class="reply"><a href="#">Reply</a></p> -->
 
 										<!-- END .comment-right -->
 										</div>
@@ -267,53 +264,29 @@
 
 							</li>
 
-							<li class="comment-entry clearfix">
-
-								<!-- BEGIN .comment-left -->
-								<div class="comment-left">
-									<div class="comment-image"></div>
-								<!-- END .comment-left -->
-								</div>
-
-								<!-- BEGIN .comment-right -->
-								<div class="comment-right">
-
-									<p class="comment-info">Admin <span>Aug 6, 2012 at 9:37 am </span></p>
-									<p class="comment-text">Duis ut mauris ut lacus tincidunt viverra. Morbi ornare tellus vitae velit molestie ullamcorper. Mauris sodales congue est, nec tristique nulla vulputate eu. Aliquam at nulla ut diam scelerisque dictum eu sit amet lectus. </p>
-									<p class="reply"><a href="#">Reply</a></p>
-
-								<!-- END .comment-right -->
-								</div>
-
-							</li>
+							
 
 						</ul>
 						
-						<h3 class="block-title">Leave a Comment</h3>
+						<h3 class="block-title">Dejar un comentario</h3>
 						
 						<h:form id="commentform">
 
 							<div class="field-row">
-								<label for="contact_name">Name <span>(required)</span></label>
+								<label for="contact_name">nombre(Que deberia ya cargar por estar logeado) </label>
 							   	<input type="text" name="contact_name" id="contact_name" class="text_input" value="" />
 							</div>
 
-							<div class="field-row">
-								<label for="email">Email <span>(required)</span></label>
-								<input type="text" name="email" id="email" class="text_input" value="" />		
-							</div>
+							
+
+							
 
 							<div class="field-row">
-								<label for="site_url">Website URL</label>
-								<input type="text" name="site_url" id="site_url" class="text_input" value="" />		
-							</div>
-
-							<div class="field-row">
-								<label for="message_text">Comment <span>(required)</span></label>
+								<label for="message_text">Comentario <span>(requerido)</span></label>
 								<textarea name="message" id="message_text" class="text_input" cols="60" rows="9"></textarea>
 							</div>
 
-							<input class="button1" type="submit" value="Submit Comment" id="submit" name="submit"/>
+							<input class="button1" type="submit" value="Comentar" id="submit" name="submit"/>
 
 						</h:form>
 						
