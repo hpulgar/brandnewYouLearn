@@ -70,8 +70,6 @@ public class ForoPosteos implements Serializable {
     @NotNull
     @Column(name = "Autorizado")
     private boolean autorizado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPost")
-    private List<PosteosComentario> posteosComentarioList;
     @JoinColumn(name = "id_subcategoria", referencedColumnName = "id_subcategoria")
     @ManyToOne(optional = false)
     private ForoSubcategoria idSubcategoria;
@@ -132,15 +130,6 @@ public class ForoPosteos implements Serializable {
 
     public void setAutorizado(boolean autorizado) {
         this.autorizado = autorizado;
-    }
-
-    @XmlTransient
-    public List<PosteosComentario> getPosteosComentarioList() {
-        return posteosComentarioList;
-    }
-
-    public void setPosteosComentarioList(List<PosteosComentario> posteosComentarioList) {
-        this.posteosComentarioList = posteosComentarioList;
     }
 
     public ForoSubcategoria getIdSubcategoria() {

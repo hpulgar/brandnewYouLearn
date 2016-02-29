@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
 
 
@@ -29,7 +30,21 @@
 	<script type="text/javascript" src="js/tinynav.min.js"></script>
 	<script type="text/javascript" src="js/jquery.uniform.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
-	
+	<script>
+$(document).ready(function(){
+     $("#comment-right").hide();
+    $("#responder").click(function(){
+        $("#comment-right").show();
+         $("#responder").hide();
+           $('#respuesta').focus();
+    });
+    
+    $("#respuesta").focusout(function(){
+ $("#responder").show();
+   $("#comment-right").hide();
+});
+});
+</script>
 <!-- END head -->
    </h:head>
 
@@ -185,14 +200,27 @@
 				<div class="blog-entry clearfix">
 					
 					<div class="blog-info">
-						<div class="blog-date">
-							<h3>DiaFecha <span>MesFecha</span></h3>
-						</div>
+                                           
+                                            
+					<div class="blog-date">
+							<h3>FotoAvatarPosteador</h3>
+						</div>	
+                                           
 						<ul class="blog-meta">
-                                                    <li><strong>Iniciado por</strong>#{fp.idUser.username}</li>
-							<li><strong>en categoria</strong> NomCategoria</li>
-							<li><strong>Commentarios</strong> numC</li>
+                                                    <c:forEach items="#{foroPosteosController.cargaUno(foroPosteosController.idPosteo)}" var="bi">
+                                                    <li> <strong>Fecha </strong></li>
+                                                    <li><h:outputText value="#{bi.fecha}">
+                                                               <f:convertDateTime type="date" pattern="dd-M-yyyy HH:mm"/>
+                                                         </h:outputText></li>
+                                                    <li><strong>Inicia|o por </strong></li>
+                                                    <li> #{bi.idUser.username}</li>                                       
+                                                    <li><strong>En categoria</strong></li>
+                                                    <li>#{bi.idSubcategoria.descripcion}</li>
+                                                    <li><strong>Commentarios</strong></li> 
+                                                    <li>(Count)</li>
+                                                    </c:forEach>
 						</ul>
+                                                 
 					</div>
 					
 					<div class="blog-content blog-content-single">	
@@ -209,7 +237,7 @@
 					<div class="news-social-links">
 						<ul class="clearfix">
 							<li class="tweet-link"><a href="#">Tweetear este contenido</a></li>
-							<li class="facebook-link"><a href="#">Compartir en Facebook</a></li>
+							<li class="facebook-link"><a href="#">ompartir en Facebook</a></li>
 							
 						</ul>
 					</div>
@@ -231,29 +259,27 @@
 								</div>
 
 								<!-- BEGIN .comment-right -->
+                                                                 <c:forEach items="#{masterComentarioController.comentariosForo}" var="mc">
 								<div class="comment-right">
-
-									<p class="comment-info">nomCommentarios <span>FechaComentarios </span></p>
-									<p class="comment-text">ContenidoComentario </p>
-									<p class="reply"><a href="#">Responder</a></p>
-
+                                                                    
+                                                                        
+                                                                   
+                                                    
+                                                                        <p class="comment-info">#{mc.idUsuario.username} <span> #{mc.fechaComentario} </span></p>
+                                                                        <p class="comment-text">#{mc.comentario}</p>
+									<p class="reply"><a id="responder">Responder</a></p>
+                                                                   
 								<!-- END .comment-right -->
 								</div>
-
+                                                                </c:forEach>
 								<ul>
 									<li class="comment-entry clearfix">
 
-										<!-- BEGIN .comment-left -->
-										<div class="comment-left">
-											<div class="comment-image"></div>
-										<!-- END .comment-left -->
-										</div>
+				
+										<div id ="comment-right" class="comment-right">
 
-										<!-- BEGIN .comment-right -->
-										<div class="comment-right">
-
-											<p class="comment-info">nomRespondedor <span>Fecharespusta </span></p>
-											<p class="comment-text">ContenidoRespuesta </p>
+											 <h:inputHidden  class="comment-info" value="some text" />
+												<input type="text" name="respuesta" id="respuesta" class="text_input" value="" />
 											<!--<p class="reply"><a href="#">Reply</a></p> -->
 
 										<!-- END .comment-right -->
@@ -268,13 +294,13 @@
 
 						</ul>
 						
-						<h3 class="block-title">Dejar un comentario</h3>
+                                                <h3 class="block-title"><a>Comentando como : </a>#{usuarioController.verUsername(usuarioController.id_user)}</h3>
 						
 						<h:form id="commentform">
 
 							<div class="field-row">
-								<label for="contact_name">nombre(Que deberia ya cargar por estar logeado) </label>
-							   	<input type="text" name="contact_name" id="contact_name" class="text_input" value="" />
+								<label for="contact_name"></label>
+							   	
 							</div>
 
 							
@@ -283,11 +309,11 @@
 
 							<div class="field-row">
 								<label for="message_text">Comentario <span>(requerido)</span></label>
-								<textarea name="message" id="message_text" class="text_input" cols="60" rows="9"></textarea>
+                                                                <h:inputTextarea value="#{masterComentarioController.selected.comentario}"/>
 							</div>
 
-							<input class="button1" type="submit" value="Comentar" id="submit" name="submit"/>
-
+                                                    
+                                                    <h:commandButton class="button1" action="#{masterComentarioController.CrearComentario(usuarioController.id_user,foroPosteosController.idPosteo,2)}" value ="Comentar"/>
 						</h:form>
 						
 					<!-- END #respond -->

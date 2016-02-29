@@ -33,6 +33,14 @@ public class ForoPosteosController implements Serializable {
         private List<ForoPosteos> carga = new ArrayList();
     private List<ForoPosteos> cargaNoticias = new ArrayList();
     private int idPosteo;
+
+    public int getIdPosteo() {
+        return idPosteo;
+    }
+
+    public void setIdPosteo(int idPosteo) {
+        this.idPosteo = idPosteo;
+    }
     private List<ForoPosteos> carga2 = new ArrayList();
     private String tit;
 
@@ -189,11 +197,9 @@ public class ForoPosteosController implements Serializable {
     }
         public List<ForoPosteos> cargaUno(int id)
     {
-        System.out.println(id);
         carga.clear();
         carga = ejbFacade.verP(id);
         return carga;
-        
     }
         
      public List<ForoPosteos> cargaTodos()
@@ -221,46 +227,6 @@ public class ForoPosteosController implements Serializable {
 
     public ForoPosteos getForoPosteos(java.lang.Integer id) {
         return ejbFacade.find(id);
-    }
-
-    public List<ForoPosteos> getCarga() {
-        return carga;
-    }
-
-    public void setCarga(List<ForoPosteos> carga) {
-        this.carga = carga;
-    }
-
-    public List<ForoPosteos> getCargaNoticias() {
-        return cargaNoticias;
-    }
-
-    public void setCargaNoticias(List<ForoPosteos> cargaNoticias) {
-        this.cargaNoticias = cargaNoticias;
-    }
-
-    public int getIdPosteo() {
-        return idPosteo;
-    }
-
-    public void setIdPosteo(int idPosteo) {
-        this.idPosteo = idPosteo;
-    }
-
-    public List<ForoPosteos> getCarga2() {
-        return carga2;
-    }
-
-    public void setCarga2(List<ForoPosteos> carga2) {
-        this.carga2 = carga2;
-    }
-
-    public String getTit() {
-        return tit;
-    }
-
-    public void setTit(String tit) {
-        this.tit = tit;
     }
 
     @FacesConverter(forClass = ForoPosteos.class)

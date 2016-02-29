@@ -7,9 +7,7 @@ package ENTITIES;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,14 +17,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -57,8 +53,6 @@ public class PublicacionPerfil implements Serializable {
     @Column(name = "fecha_publicacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaPublicacion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPublicacion")
-    private List<ComentarioPublicacion> comentarioPublicacionList;
     @JoinColumn(name = "id_publicador", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
     private Usuario idPublicador;
@@ -101,15 +95,6 @@ public class PublicacionPerfil implements Serializable {
 
     public void setFechaPublicacion(Date fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
-    }
-
-    @XmlTransient
-    public List<ComentarioPublicacion> getComentarioPublicacionList() {
-        return comentarioPublicacionList;
-    }
-
-    public void setComentarioPublicacionList(List<ComentarioPublicacion> comentarioPublicacionList) {
-        this.comentarioPublicacionList = comentarioPublicacionList;
     }
 
     public Usuario getIdPublicador() {

@@ -71,14 +71,8 @@ public class Usuario implements Serializable {
     private String correo;
     @Column(name = "creditos")
     private Integer creditos;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "posteador")
-    private List<PosteosComentario> posteosComentarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private List<Sesion> sesionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idComentador")
-    private List<ComentarioPublicacion> comentarioPublicacionList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
-    private List<MensajesTablero> mensajesTableroList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPublicador")
     private List<PublicacionPerfil> publicacionPerfilList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
@@ -87,12 +81,18 @@ public class Usuario implements Serializable {
     private List<Amigos> amigosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario2")
     private List<Amigos> amigosList1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idReceptor")
-    private List<MensajePara> mensajeParaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUser")
     private List<ForoPosteos> foroPosteosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
+    private List<Persona> personaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
+    private List<LogStreaming> logStreamingList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
+    private List<MasterRespuestas> masterRespuestasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private List<InscripcionCurso> inscripcionCursoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
+    private List<Notificaciones> notificacionesList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private List<Curso> cursoList;
     @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")
@@ -100,8 +100,12 @@ public class Usuario implements Serializable {
     private Perfil idPerfil;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmisor")
     private List<Mensaje> mensajeList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idReceptor")
+    private List<Mensaje> mensajeList1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private List<Tablero> tableroList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
+    private List<MasterComentario> masterComentarioList;
 
     public Usuario() {
     }
@@ -166,39 +170,12 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public List<PosteosComentario> getPosteosComentarioList() {
-        return posteosComentarioList;
-    }
-
-    public void setPosteosComentarioList(List<PosteosComentario> posteosComentarioList) {
-        this.posteosComentarioList = posteosComentarioList;
-    }
-
-    @XmlTransient
     public List<Sesion> getSesionList() {
         return sesionList;
     }
 
     public void setSesionList(List<Sesion> sesionList) {
         this.sesionList = sesionList;
-    }
-
-    @XmlTransient
-    public List<ComentarioPublicacion> getComentarioPublicacionList() {
-        return comentarioPublicacionList;
-    }
-
-    public void setComentarioPublicacionList(List<ComentarioPublicacion> comentarioPublicacionList) {
-        this.comentarioPublicacionList = comentarioPublicacionList;
-    }
-
-    @XmlTransient
-    public List<MensajesTablero> getMensajesTableroList() {
-        return mensajesTableroList;
-    }
-
-    public void setMensajesTableroList(List<MensajesTablero> mensajesTableroList) {
-        this.mensajesTableroList = mensajesTableroList;
     }
 
     @XmlTransient
@@ -238,15 +215,6 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public List<MensajePara> getMensajeParaList() {
-        return mensajeParaList;
-    }
-
-    public void setMensajeParaList(List<MensajePara> mensajeParaList) {
-        this.mensajeParaList = mensajeParaList;
-    }
-
-    @XmlTransient
     public List<ForoPosteos> getForoPosteosList() {
         return foroPosteosList;
     }
@@ -256,12 +224,48 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
+    public List<Persona> getPersonaList() {
+        return personaList;
+    }
+
+    public void setPersonaList(List<Persona> personaList) {
+        this.personaList = personaList;
+    }
+
+    @XmlTransient
+    public List<LogStreaming> getLogStreamingList() {
+        return logStreamingList;
+    }
+
+    public void setLogStreamingList(List<LogStreaming> logStreamingList) {
+        this.logStreamingList = logStreamingList;
+    }
+
+    @XmlTransient
+    public List<MasterRespuestas> getMasterRespuestasList() {
+        return masterRespuestasList;
+    }
+
+    public void setMasterRespuestasList(List<MasterRespuestas> masterRespuestasList) {
+        this.masterRespuestasList = masterRespuestasList;
+    }
+
+    @XmlTransient
     public List<InscripcionCurso> getInscripcionCursoList() {
         return inscripcionCursoList;
     }
 
     public void setInscripcionCursoList(List<InscripcionCurso> inscripcionCursoList) {
         this.inscripcionCursoList = inscripcionCursoList;
+    }
+
+    @XmlTransient
+    public List<Notificaciones> getNotificacionesList() {
+        return notificacionesList;
+    }
+
+    public void setNotificacionesList(List<Notificaciones> notificacionesList) {
+        this.notificacionesList = notificacionesList;
     }
 
     @XmlTransient
@@ -291,12 +295,30 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
+    public List<Mensaje> getMensajeList1() {
+        return mensajeList1;
+    }
+
+    public void setMensajeList1(List<Mensaje> mensajeList1) {
+        this.mensajeList1 = mensajeList1;
+    }
+
+    @XmlTransient
     public List<Tablero> getTableroList() {
         return tableroList;
     }
 
     public void setTableroList(List<Tablero> tableroList) {
         this.tableroList = tableroList;
+    }
+
+    @XmlTransient
+    public List<MasterComentario> getMasterComentarioList() {
+        return masterComentarioList;
+    }
+
+    public void setMasterComentarioList(List<MasterComentario> masterComentarioList) {
+        this.masterComentarioList = masterComentarioList;
     }
 
     @Override

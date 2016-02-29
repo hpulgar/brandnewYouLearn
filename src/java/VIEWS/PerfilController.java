@@ -153,7 +153,7 @@ public class PerfilController implements Serializable {
             current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
         }
     }
-    
+
       public String nPerfil(int idperfil)
     {
         HttpSession s = Util.getSession();

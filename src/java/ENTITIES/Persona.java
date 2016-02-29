@@ -39,8 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Persona.findByApellido", query = "SELECT p FROM Persona p WHERE p.apellido = :apellido"),
     @NamedQuery(name = "Persona.findByFechaNac", query = "SELECT p FROM Persona p WHERE p.fechaNac = :fechaNac"),
     @NamedQuery(name = "Persona.findByOcupacion", query = "SELECT p FROM Persona p WHERE p.ocupacion = :ocupacion"),
-    @NamedQuery(name = "Persona.findByGenero", query = "SELECT p FROM Persona p WHERE p.genero = :genero"),
-    @NamedQuery(name = "Persona.findByIdUsuario", query = "SELECT p FROM Persona p WHERE p.idUsuario = :idUsuario")})
+    @NamedQuery(name = "Persona.findByGenero", query = "SELECT p FROM Persona p WHERE p.genero = :genero")})
 public class Persona implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -73,10 +72,6 @@ public class Persona implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "Genero")
     private String genero;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id_usuario")
-    private int idUsuario;
     @Lob
     @Size(max = 65535)
     @Column(name = "descripcion")
@@ -84,6 +79,9 @@ public class Persona implements Serializable {
     @JoinColumn(name = "id_ciudad", referencedColumnName = "id_ciudad")
     @ManyToOne(optional = false)
     private Ciudad idCiudad;
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    @ManyToOne(optional = false)
+    private Usuario idUsuario;
 
     public Persona() {
     }
@@ -92,14 +90,13 @@ public class Persona implements Serializable {
         this.idPersona = idPersona;
     }
 
-    public Persona(Integer idPersona, String nombre, String apellido, Date fechaNac, String ocupacion, String genero, int idUsuario) {
+    public Persona(Integer idPersona, String nombre, String apellido, Date fechaNac, String ocupacion, String genero) {
         this.idPersona = idPersona;
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaNac = fechaNac;
         this.ocupacion = ocupacion;
         this.genero = genero;
-        this.idUsuario = idUsuario;
     }
 
     public Integer getIdPersona() {
@@ -150,14 +147,6 @@ public class Persona implements Serializable {
         this.genero = genero;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -172,6 +161,14 @@ public class Persona implements Serializable {
 
     public void setIdCiudad(Ciudad idCiudad) {
         this.idCiudad = idCiudad;
+    }
+
+    public Usuario getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     @Override

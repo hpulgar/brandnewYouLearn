@@ -22,7 +22,7 @@ public abstract class AbstractFacade<T> {
     protected abstract EntityManager getEntityManager();
 
     public void create(T entity) {
-        getEntityManager().persist(entity);
+        getEntityManager().merge(entity);
     }
 
     public void edit(T entity) {
@@ -60,4 +60,104 @@ public abstract class AbstractFacade<T> {
         return ((Long) q.getSingleResult()).intValue();
     }
     
+    ////////////////////////////////////
+    
+//    public List <Usuario> cargaPerfileUser(int id)
+//     {
+//         EntityManager em2 = getEntityManager();
+//         Query q = em2.createNamedQuery("Usuario.findByIdUsuario").setParameter("idUsuario", id);
+//         return q.getResultList();
+//         
+//     }
+//    public List<InscripcionCurso> sCursos()
+//    {
+//        EntityManager em2= getEntityManager();
+//        Query q= em2.createNamedQuery("InscripcionCurso.findAll");
+//        return q.getResultList();
+//    }
+//    
+//    public List<Amigos> verAmigos()
+//    {
+//        EntityManager em2= getEntityManager();
+//        Query q= em2.createNamedQuery("Amigos.findAll");
+//        return q.getResultList();
+//    }
+//    
+//     public void borrarMenu(Menu m)//metodo arreglado parar crear los destroy
+//    {
+//        EntityManager em2= getEntityManager();
+//        Menu  b = em2.getReference(Menu.class, m.getIdMenu());
+//               
+//        em2.remove(b);
+//    }
+//    
+//    public void borrarCiudad(Ciudad c)//metodo arreglado parar crear los destroy
+//    {
+//        EntityManager em2= getEntityManager();
+//        Ciudad  b = em2.getReference(Ciudad.class, c.getIdCiudad());
+//               
+//        em2.remove(b);
+//    }
+//    
+//    public void borrarArchivo(Archivo e)
+//    {
+//        EntityManager em2= getEntityManager();
+//        Archivo  b = em2.getReference(Archivo.class,e.getIdArchivo());
+//               
+//        em2.remove(b);
+//    }
+//    
+//    public void borrarCursoSubCategoria(CursoSubCat e)
+//    {
+//        EntityManager em2= getEntityManager();
+//        CursoSubCat  b = em2.getReference(CursoSubCat.class,e.getIdSubcat());
+//               
+//        em2.remove(b);
+//    }
+//    public void borrarCursoCategoria(CursoCategoria e)
+//    {
+//        EntityManager em2= getEntityManager();
+//        CursoCategoria  b = em2.getReference(CursoCategoria.class,e.getIdCat());
+//               
+//        em2.remove(b);
+//    }
+//     public void borrarCurso(Curso e)
+//    {
+//        EntityManager em2= getEntityManager();
+//        Curso  b = em2.getReference(Curso.class,e.getIdCurso());
+//               
+//        em2.remove(b);
+//    }
+//     
+//     public void borrarForoSubCategoria(ForoSubcategoria e)
+//    {
+//        EntityManager em2= getEntityManager();
+//        ForoSubcategoria  b = em2.getReference(ForoSubcategoria.class,e.getIdSubcategoria());
+//               
+//        em2.remove(b);
+//    }
+//     
+//    public void borrarForoPosteos(ForoPosteos e)
+//    {
+//        EntityManager em2= getEntityManager();
+//        ForoPosteos  b = em2.getReference(ForoPosteos.class,e.getIdPost());
+//               
+//        em2.remove(b);
+//    }
+//    
+//    public void borrarLogSubidas(LogSubidas e)
+//    {
+//        EntityManager em2= getEntityManager();
+//        LogSubidas  b = em2.getReference(LogSubidas.class,e.getIdLog());
+//               
+//        em2.remove(b);
+//    }
+//    
+//     public void borrarSS(InscripcionCurso e)
+//    {
+//        EntityManager em2= getEntityManager();
+//        LogSubidas  b = em2.getReference(LogSubidas.class,e.getIdInsc());
+//               
+//        em2.remove(b);
+//    }
 }

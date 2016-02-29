@@ -6,8 +6,8 @@
 package ENTITIES;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,8 +17,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -34,7 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Mensaje.findAll", query = "SELECT m FROM Mensaje m"),
     @NamedQuery(name = "Mensaje.findByIdMensaje", query = "SELECT m FROM Mensaje m WHERE m.idMensaje = :idMensaje"),
     @NamedQuery(name = "Mensaje.findByAsunto", query = "SELECT m FROM Mensaje m WHERE m.asunto = :asunto"),
-    @NamedQuery(name = "Mensaje.findByContenido", query = "SELECT m FROM Mensaje m WHERE m.contenido = :contenido")})
+    @NamedQuery(name = "Mensaje.findByContenido", query = "SELECT m FROM Mensaje m WHERE m.contenido = :contenido"),
+    @NamedQuery(name = "Mensaje.findByFechaEnvio", query = "SELECT m FROM Mensaje m WHERE m.fechaEnvio = :fechaEnvio")})
 public class Mensaje implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,11 +54,17 @@ public class Mensaje implements Serializable {
     @Size(min = 1, max = 200)
     @Column(name = "contenido")
     private String contenido;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "mensaje")
-    private MensajePara mensajePara;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "fecha_envio")
+    @Temporal(TemporalType.DATE)
+    private Date fechaEnvio;
     @JoinColumn(name = "id_emisor", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
     private Usuario idEmisor;
+    @JoinColumn(name = "id_receptor", referencedColumnName = "id_usuario")
+    @ManyToOne(optional = false)
+    private Usuario idReceptor;
 
     public Mensaje() {
     }
@@ -65,10 +73,11 @@ public class Mensaje implements Serializable {
         this.idMensaje = idMensaje;
     }
 
-    public Mensaje(Integer idMensaje, String asunto, String contenido) {
+    public Mensaje(Integer idMensaje, String asunto, String contenido, Date fechaEnvio) {
         this.idMensaje = idMensaje;
         this.asunto = asunto;
         this.contenido = contenido;
+        this.fechaEnvio = fechaEnvio;
     }
 
     public Integer getIdMensaje() {
@@ -95,12 +104,12 @@ public class Mensaje implements Serializable {
         this.contenido = contenido;
     }
 
-    public MensajePara getMensajePara() {
-        return mensajePara;
+    public Date getFechaEnvio() {
+        return fechaEnvio;
     }
 
-    public void setMensajePara(MensajePara mensajePara) {
-        this.mensajePara = mensajePara;
+    public void setFechaEnvio(Date fechaEnvio) {
+        this.fechaEnvio = fechaEnvio;
     }
 
     public Usuario getIdEmisor() {
@@ -109,6 +118,14 @@ public class Mensaje implements Serializable {
 
     public void setIdEmisor(Usuario idEmisor) {
         this.idEmisor = idEmisor;
+    }
+
+    public Usuario getIdReceptor() {
+        return idReceptor;
+    }
+
+    public void setIdReceptor(Usuario idReceptor) {
+        this.idReceptor = idReceptor;
     }
 
     @Override

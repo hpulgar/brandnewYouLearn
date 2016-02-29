@@ -33,17 +33,69 @@ public class UsuarioController implements Serializable {
     private Usuario current;
     private DataModel items = null;
     @EJB
-    private MODELS.UsuarioFacade ejbFacade;
+      private MODELS.UsuarioFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
    private String nombreUsuario,contraseña,message;
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public List<Usuario> getIdp() {
+        return idp;
+    }
+
+    public void setIdp(List<Usuario> idp) {
+        this.idp = idp;
+    }
+
+    public List<Usuario> getCargaP() {
+        return cargaP;
+    }
+
+    public void setCargaP(List<Usuario> cargaP) {
+        this.cargaP = cargaP;
+    }
+
+    public int getIdProfile() {
+        return idProfile;
+    }
+
+    public void setIdProfile(int idProfile) {
+        this.idProfile = idProfile;
+    }
    private List<Usuario> idp = new ArrayList();
     private List<Usuario> cargaP = new ArrayList();
+    private int idProfile;
+
 
  private int id_user;
     private String correo;
     private int id_muro;
-    private int idProfile;
+  
+
+  
 
     public UsuarioController() {
     }
@@ -59,7 +111,7 @@ public class UsuarioController implements Serializable {
     private UsuarioFacade getFacade() {
         return ejbFacade;
     }
-    
+
      public int getId_user() {
         return id_user;
     }
@@ -102,6 +154,18 @@ public class UsuarioController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
+
+    
+        //carga username
+    public String verUsername(int idp){
+        System.out.println("IMRPIMIENDO EL ID DEL USUARIO "+idp);
+        Usuario uo = new Usuario();
+        uo = ejbFacade.cargaUsername(idp).get(0);
+        System.out.println("IMRPIMIENDO EL nombre DEL USUARIO "+uo.getUsername());
+    
+        return uo.getUsername();
+    }
+    
     
      private int getPerfil(String nomU,String PassUS)
      {
@@ -211,7 +275,7 @@ public class UsuarioController implements Serializable {
     }
     return null;
   }
-
+///////////////////////////////////////////////// fin
 
     public String create() {
         try {
@@ -324,62 +388,6 @@ public class UsuarioController implements Serializable {
 
     public Usuario getUsuario(java.lang.Integer id) {
         return ejbFacade.find(id);
-    }
-
-    public Usuario getCurrent() {
-        return current;
-    }
-
-    public void setCurrent(Usuario current) {
-        this.current = current;
-    }
-
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public List<Usuario> getIdp() {
-        return idp;
-    }
-
-    public void setIdp(List<Usuario> idp) {
-        this.idp = idp;
-    }
-
-    public List<Usuario> getCargaP() {
-        return cargaP;
-    }
-
-    public void setCargaP(List<Usuario> cargaP) {
-        this.cargaP = cargaP;
-    }
-
-    public int getIdProfile() {
-        return idProfile;
-    }
-
-    public void setIdProfile(int idProfile) {
-        this.idProfile = idProfile;
     }
 
     @FacesConverter(forClass = Usuario.class)

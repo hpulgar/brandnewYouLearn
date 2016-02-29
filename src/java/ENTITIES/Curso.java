@@ -79,6 +79,8 @@ public class Curso implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCurso")
     private List<Archivo> archivoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCurso")
+    private List<LogStreaming> logStreamingList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCurso")
     private List<InscripcionCurso> inscripcionCursoList;
     @JoinColumn(name = "id_cat", referencedColumnName = "id_subcat")
     @ManyToOne(optional = false)
@@ -171,6 +173,15 @@ public class Curso implements Serializable {
 
     public void setArchivoList(List<Archivo> archivoList) {
         this.archivoList = archivoList;
+    }
+
+    @XmlTransient
+    public List<LogStreaming> getLogStreamingList() {
+        return logStreamingList;
+    }
+
+    public void setLogStreamingList(List<LogStreaming> logStreamingList) {
+        this.logStreamingList = logStreamingList;
     }
 
     @XmlTransient

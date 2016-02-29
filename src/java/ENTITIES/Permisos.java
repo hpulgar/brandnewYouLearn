@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Permisos.findAll", query = "SELECT p FROM Permisos p"),
     @NamedQuery(name = "Permisos.findByIdMenu", query = "SELECT p FROM Permisos p WHERE p.idMenu = :idMenu"),
     @NamedQuery(name = "Permisos.findByLogin", query = "SELECT p FROM Permisos p WHERE p.login = :login"),
-    @NamedQuery(name = "Permisos.findByAdministrarcursos", query = "SELECT p FROM Permisos p WHERE p.administrarcursos = :administrarcursos"),
+    @NamedQuery(name = "Permisos.findByAdministrarCursos", query = "SELECT p FROM Permisos p WHERE p.administrarCursos = :administrarCursos"),
     @NamedQuery(name = "Permisos.findByVerCursos", query = "SELECT p FROM Permisos p WHERE p.verCursos = :verCursos"),
     @NamedQuery(name = "Permisos.findByPanelAdministrativo", query = "SELECT p FROM Permisos p WHERE p.panelAdministrativo = :panelAdministrativo"),
     @NamedQuery(name = "Permisos.findByPanelModerador", query = "SELECT p FROM Permisos p WHERE p.panelModerador = :panelModerador"),
@@ -52,8 +52,8 @@ public class Permisos implements Serializable {
     private boolean login;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Administrar_cursos")
-    private boolean administrarcursos;
+    @Column(name = "administrar_cursos")
+    private boolean administrarCursos;
     @Basic(optional = false)
     @NotNull
     @Column(name = "ver_Cursos")
@@ -93,10 +93,10 @@ public class Permisos implements Serializable {
         this.idMenu = idMenu;
     }
 
-    public Permisos(Integer idMenu, boolean login, boolean administrarcursos, boolean verCursos, boolean panelAdministrativo, boolean panelModerador, boolean foroGeneral, boolean suscripcion, boolean mensajeria, boolean accesoTablero) {
+    public Permisos(Integer idMenu, boolean login, boolean administrarCursos, boolean verCursos, boolean panelAdministrativo, boolean panelModerador, boolean foroGeneral, boolean suscripcion, boolean mensajeria, boolean accesoTablero) {
         this.idMenu = idMenu;
         this.login = login;
-        this.administrarcursos = administrarcursos;
+        this.administrarCursos = administrarCursos;
         this.verCursos = verCursos;
         this.panelAdministrativo = panelAdministrativo;
         this.panelModerador = panelModerador;
@@ -122,12 +122,12 @@ public class Permisos implements Serializable {
         this.login = login;
     }
 
-    public boolean getAdministrarcursos() {
-        return administrarcursos;
+    public boolean getAdministrarCursos() {
+        return administrarCursos;
     }
 
-    public void setAdministrarcursos(boolean administrarcursos) {
-        this.administrarcursos = administrarcursos;
+    public void setAdministrarCursos(boolean administrarCursos) {
+        this.administrarCursos = administrarCursos;
     }
 
     public boolean getVerCursos() {

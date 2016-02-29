@@ -21,12 +21,16 @@
                     <h:inputText id="asunto" value="#{mensajeController.selected.asunto}" title="#{bundle.CreateMensajeTitle_asunto}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_asunto}"/>
                     <h:outputLabel value="#{bundle.CreateMensajeLabel_contenido}" for="contenido" />
                     <h:inputText id="contenido" value="#{mensajeController.selected.contenido}" title="#{bundle.CreateMensajeTitle_contenido}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_contenido}"/>
-                    <h:outputLabel value="#{bundle.CreateMensajeLabel_mensajePara}" for="mensajePara" />
-                    <h:selectOneMenu id="mensajePara" value="#{mensajeController.selected.mensajePara}" title="#{bundle.CreateMensajeTitle_mensajePara}" >
-                        <f:selectItems value="#{mensajeParaController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateMensajeLabel_fechaEnvio}" for="fechaEnvio" />
+                    <h:inputText id="fechaEnvio" value="#{mensajeController.selected.fechaEnvio}" title="#{bundle.CreateMensajeTitle_fechaEnvio}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_fechaEnvio}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
                     <h:outputLabel value="#{bundle.CreateMensajeLabel_idEmisor}" for="idEmisor" />
                     <h:selectOneMenu id="idEmisor" value="#{mensajeController.selected.idEmisor}" title="#{bundle.CreateMensajeTitle_idEmisor}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_idEmisor}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateMensajeLabel_idReceptor}" for="idReceptor" />
+                    <h:selectOneMenu id="idReceptor" value="#{mensajeController.selected.idReceptor}" title="#{bundle.CreateMensajeTitle_idReceptor}" required="true" requiredMessage="#{bundle.CreateMensajeRequiredMessage_idReceptor}">
                         <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>

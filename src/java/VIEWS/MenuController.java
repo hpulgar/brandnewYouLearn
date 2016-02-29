@@ -129,7 +129,7 @@ public class MenuController implements Serializable {
             return "List";
         }
     }
-    
+
      public boolean logeado()
      {
          boolean value= true;

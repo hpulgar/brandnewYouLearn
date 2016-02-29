@@ -29,13 +29,15 @@
                     <h:inputText id="ocupacion" value="#{personaController.selected.ocupacion}" title="#{bundle.CreatePersonaTitle_ocupacion}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_ocupacion}"/>
                     <h:outputLabel value="#{bundle.CreatePersonaLabel_genero}" for="genero" />
                     <h:inputText id="genero" value="#{personaController.selected.genero}" title="#{bundle.CreatePersonaTitle_genero}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_genero}"/>
-                    <h:outputLabel value="#{bundle.CreatePersonaLabel_idUsuario}" for="idUsuario" />
-                    <h:inputText id="idUsuario" value="#{personaController.selected.idUsuario}" title="#{bundle.CreatePersonaTitle_idUsuario}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_idUsuario}"/>
                     <h:outputLabel value="#{bundle.CreatePersonaLabel_descripcion}" for="descripcion" />
                     <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{personaController.selected.descripcion}" title="#{bundle.CreatePersonaTitle_descripcion}" />
                     <h:outputLabel value="#{bundle.CreatePersonaLabel_idCiudad}" for="idCiudad" />
                     <h:selectOneMenu id="idCiudad" value="#{personaController.selected.idCiudad}" title="#{bundle.CreatePersonaTitle_idCiudad}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_idCiudad}">
                         <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreatePersonaLabel_idUsuario}" for="idUsuario" />
+                    <h:selectOneMenu id="idUsuario" value="#{personaController.selected.idUsuario}" title="#{bundle.CreatePersonaTitle_idUsuario}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_idUsuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />

@@ -35,6 +35,6 @@ public class ForoPosteosFacade extends AbstractFacade<ForoPosteos> {
          EntityManager m2 =  getEntityManager();
         Query q= m2.createNamedQuery("ForoPosteos.verPost").setParameter("idPost", idPost);
         return q.getResultList();
-    }
+}
     
 }
